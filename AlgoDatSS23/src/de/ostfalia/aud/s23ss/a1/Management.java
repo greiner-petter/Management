@@ -112,6 +112,7 @@ public class Management implements IManagement {
 
     @Override
     public IEmployee[] members(Department department) {
+        operations = 0;
         IEmployee[] matchingEmployees = new IEmployee[0];
         int i = 0;
         for (IEmployee employee : data) {
