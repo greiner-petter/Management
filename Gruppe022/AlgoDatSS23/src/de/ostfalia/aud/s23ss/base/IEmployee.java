@@ -2,8 +2,6 @@ package de.ostfalia.aud.s23ss.base;
 
 import java.time.LocalDate;
 
-import de.ostfalia.aud.s23ss.base.IEmployee;
-
 
 public interface IEmployee extends Comparable<IEmployee>{
 

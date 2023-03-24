@@ -1,14 +1,41 @@
 package de.ostfalia.aud.s23ss.base;
 
 public enum Department {
+    /**
+     *
+     */
     SERVICE("Service"),
+    /**
+     *
+     */
     DEVELOPMENT("Development"),
+    /**
+     *
+     */
     SALES("Sales"),
+    /**
+     *
+     */
     PRODUCTION("Production"),
+    /**
+     *
+     */
     MANPOWER("Manpower"),
+    /**
+     *
+     */
     RESEARCH("Research"),
+    /**
+     *
+     */
     MARKETING("Marketing"),
+    /**
+     *
+     */
     MANAGEMENT("Management"),
+    /**
+     *
+     */
     FINANCE("Finance");
 
     private final String name;
