@@ -2,8 +2,8 @@ package de.ostfalia.aud.s23ss.a1;
 
 import de.ostfalia.aud.s23ss.base.*;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -11,7 +11,7 @@ public class Management implements IManagement {
     private IEmployee[] data;
     private int operations;
 
-    public Management(String fileName) throws FileNotFoundException {
+    public Management(String fileName) throws IOException {
         operations = 0;
         FileReader fileReader = new FileReader(fileName);
         Scanner scan = new Scanner(fileReader);
@@ -28,6 +28,8 @@ public class Management implements IManagement {
             operations++;
         }
         data = Arrays.copyOf(data, data.length - 1);
+        fileReader.close();
+        scan.close();
     }
 
     public Management(String[] input) {
