@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Management implements IManagement {
-    private IEmployee[] data;
+    private IEmployee[] data = new IEmployee[8];
     private int operations;
 
     public Management(String fileName) throws IOException {
@@ -16,7 +16,6 @@ public class Management implements IManagement {
         FileReader fileReader = new FileReader(fileName);
         Scanner scan = new Scanner(fileReader);
         scan.nextLine();
-        data = new IEmployee[8];
         int i = 0;
         while (scan.hasNextLine()) {
             String nextLine = scan.nextLine();
@@ -27,13 +26,12 @@ public class Management implements IManagement {
             }
             operations++;
         }
-        data = Arrays.copyOf(data, data.length - 1);
+        clearEmptyFields();
         fileReader.close();
         scan.close();
     }
 
     public Management(String[] input) {
-        data = new IEmployee[8];
         int i = 0;
         for (String employee : input) {
             data[i] = new Employee(employee);
@@ -42,11 +40,7 @@ public class Management implements IManagement {
                 data = Arrays.copyOf(data, data.length + 1);
             }
         }
-        for (IEmployee employee : data) {
-            if (employee == null) {
-                data = Arrays.copyOf(data, data.length - 1);
-            }
-        }
+        clearEmptyFields();
     }
 
     public Management() {
@@ -141,5 +135,13 @@ public class Management implements IManagement {
     @Override
     public int height() {
         return IManagement.super.height();
+    }
+
+    public void clearEmptyFields() {
+        for (IEmployee employee : data) {
+            if (employee == null) {
+                data = Arrays.copyOf(data, data.length - 1);
+            }
+        }
     }
 }
