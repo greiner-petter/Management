@@ -134,7 +134,7 @@ public class Management implements IManagement {
 
     @Override
     public int height() {
-        return IManagement.super.height();
+        return 0;
     }
 
     public void clearEmptyFields() {
