@@ -47,6 +47,7 @@ public class Management implements IManagement {
             if (i == data.length) {
                 data = Arrays.copyOf(data, data.length + 1);
             }
+            operations++;
         }
         clearEmptyFields();
         data = merge.sort(data);
@@ -102,6 +103,7 @@ public class Management implements IManagement {
             if (data[m].getName().equals(name)) {
                 while (m >= 0 && data[m].getName().equals(name)) {
                     m--;
+                    operations++;
                 }
                 m++;
                 while (m < data.length && data[m].getName().equals(name)) {
@@ -114,6 +116,7 @@ public class Management implements IManagement {
                         i++;
                     }
                     m++;
+                    operations++;
                 }
                 return matchingEmployees;
             } else if (data[m].getName().compareTo(name) > 0) {
@@ -152,6 +155,7 @@ public class Management implements IManagement {
             if (data[m].getDepartment() == department) {
                 while (m >= 0 && data[m].getDepartment() == department) {
                     m--;
+                    operations++;
                 }
                 m++;
                 while (m < data.length && data[m].getDepartment() == department) {
@@ -162,6 +166,7 @@ public class Management implements IManagement {
                     matchingEmployees[i] = data[m];
                     i++;
                     m++;
+                    operations++;
                 }
                 return matchingEmployees;
             } else if (data[m].getDepartment().toString().compareTo(department.toString()) > 0) {
