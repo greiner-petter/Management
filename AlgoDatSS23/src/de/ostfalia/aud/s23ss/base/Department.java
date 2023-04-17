@@ -48,4 +48,8 @@ public enum Department {
     public String toString() {
         return name;
     }
+
+    public static Department create(String department) {
+        return Department.valueOf(department);
+    }
 }
