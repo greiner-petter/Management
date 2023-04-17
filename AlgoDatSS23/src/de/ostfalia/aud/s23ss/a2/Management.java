@@ -1,18 +1,21 @@
 package de.ostfalia.aud.s23ss.a2;
 
-import de.ostfalia.aud.s23ss.base.Department;
-import de.ostfalia.aud.s23ss.base.Employee;
-import de.ostfalia.aud.s23ss.base.IEmployee;
-import de.ostfalia.aud.s23ss.base.IManagement;
+import de.ostfalia.aud.s23ss.base.*;
+import de.ostfalia.aud.s23ss.comparator.DepartmentComparator;
+import de.ostfalia.aud.s23ss.comparator.KeyComparator;
+import de.ostfalia.aud.s23ss.comparator.NameComparator;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.Key;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Comparator;
 
 public class Management implements IManagement {
     private IEmployee[] data = new IEmployee[8];
     private int operations;
+    private MergeSort merge = new MergeSort(new KeyComparator());
 
     public Management(String fileName) throws IOException {
         operations = 0;
@@ -30,6 +33,8 @@ public class Management implements IManagement {
             operations++;
         }
         clearEmptyFields();
+        data = merge.sort(data);
+
         fileReader.close();
         scan.close();
     }
@@ -44,6 +49,7 @@ public class Management implements IManagement {
             }
         }
         clearEmptyFields();
+        data = merge.sort(data);
     }
 
     public Management() {
@@ -191,27 +197,20 @@ public class Management implements IManagement {
         }
     }
 
-    public void sort() {
-
-    }
-
-    public void merge() {
-
-    }
-
-    public static void main(String[] args) {
-        Management management = new Management(new String[]{
-                "10049;1961-04-24;Tramer;Basil;F;1992-05-04;Finance",
-                "10050;1958-05-21;Tramer;Basil;M;1990-12-25;Finance",
-                "10051;1953-07-28;Caine;Hidefumi;M;1992-10-15;Finance",
-                "10052;1953-07-28;Tramer;Hidefumi;M;1992-10-15;Production",
-                "10053;1953-07-28;Tramer;Hidefumi;M;1992-10-15;Production",
-                "10054;1953-07-28;Dredge;Yinghua;M;1992-10-15;Sales",
-                "10055;1953-07-28;Caine;Yinghua;M;1992-10-15;Sales"
-        });
-        IEmployee[] ems = management.search("Yinghua", "Caine");
-        System.out.println(ems.length);
-        for (IEmployee e : ems) {
+    public static void main(String[] args) throws IOException {
+//        Management management = new Management(new String[]{
+//                "10049;1961-04-24;Tramer;Basil;F;1992-05-04;Sales",
+//                "10050;1958-05-21;Tramer;Basil;M;1990-12-25;Finance",
+//                "51;1953-07-28;Caine;Hidefumi;M;1992-10-15;Finance",
+//                "10052;1953-07-28;Tramer;Hidefumi;M;1992-10-15;Production",
+//                "10053;1953-07-28;Tramer;Hidefumi;M;1992-10-15;Production",
+//                "10354;1953-07-28;Dredge;Yinghua;M;1992-10-15;Sales",
+//                "10055;1953-07-28;Caine;Yinghua;M;1992-10-15;Sales"
+//        });
+        Management management = new Management("/Users/Oliver/Documents/Code/Ostfalia/svn/i-aud-ss2023/Gruppe022/AlgoDatSS23/Materialien/10k_employees.csv");
+//        IEmployee[] ems = management.search("Yinghua", "Caine");
+//        System.out.println(ems.length);
+        for (IEmployee e : management.data) {
             System.out.println(e);
         }
     }
