@@ -28,7 +28,7 @@ public class Management implements IManagement {
             }
             operations++;
         }
-        clearEmptyFields();
+        data = clearEmptyFields(data);
         data = merge.sort(data);
 
         fileReader.close();
@@ -45,7 +45,7 @@ public class Management implements IManagement {
             }
             operations++;
         }
-        clearEmptyFields();
+        data = clearEmptyFields(data);
         data = merge.sort(data);
     }
 
@@ -115,6 +115,7 @@ public class Management implements IManagement {
                     m++;
                     operations++;
                 }
+                matchingEmployees = clearEmptyFields(matchingEmployees);
                 return matchingEmployees;
             } else if (data[m].getName().compareTo(name) > 0) {
                 r = m - 1;
@@ -165,6 +166,7 @@ public class Management implements IManagement {
                     m++;
                     operations++;
                 }
+                matchingEmployees = clearEmptyFields(matchingEmployees);
                 return matchingEmployees;
             } else if (data[m].getDepartment().toString().compareTo(department.toString()) > 0) {
                 r = m - 1;
@@ -191,12 +193,14 @@ public class Management implements IManagement {
         return 0;
     }
 
-    public void clearEmptyFields() {
-        for (IEmployee employee : data) {
+    public IEmployee[] clearEmptyFields(IEmployee[] data) {
+        IEmployee[] clearedData = data.clone();
+        for (IEmployee employee : clearedData) {
             if (employee == null) {
-                data = Arrays.copyOf(data, data.length - 1);
+                clearedData = Arrays.copyOf(clearedData, clearedData.length - 1);
             }
         }
+        return clearedData;
     }
 
     public static void main(String[] args) throws IOException {
