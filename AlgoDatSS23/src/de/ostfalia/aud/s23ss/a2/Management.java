@@ -64,6 +64,7 @@ public class Management implements IManagement {
         data = Arrays.copyOf(data, data.length + 1);
         data[data.length - 1] = new Employee(member.toString());
         operations++;
+        data = merge.sort(data);
     }
 
     @Override
