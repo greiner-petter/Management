@@ -1,21 +1,17 @@
 package de.ostfalia.aud.s23ss.a2;
 
 import de.ostfalia.aud.s23ss.base.*;
-import de.ostfalia.aud.s23ss.comparator.DepartmentComparator;
-import de.ostfalia.aud.s23ss.comparator.KeyComparator;
-import de.ostfalia.aud.s23ss.comparator.NameComparator;
+import de.ostfalia.aud.s23ss.comparator.*;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.security.Key;
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Comparator;
 
 public class Management implements IManagement {
     private IEmployee[] data = new IEmployee[8];
     private int operations;
-    private MergeSort merge = new MergeSort(new KeyComparator());
+    private final MergeSort merge = new MergeSort(new DepartmentComparator());
 
     public Management(String fileName) throws IOException {
         operations = 0;
