@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Management implements IManagement {
     private IEmployee[] data = new IEmployee[8];
     private int operations;
-    private final MergeSort merge = new MergeSort(new DepartmentComparator());
+    private final MergeSort merge = new MergeSort(new KeyComparator());
 
     public Management(String fileName) throws IOException {
         operations = 0;
