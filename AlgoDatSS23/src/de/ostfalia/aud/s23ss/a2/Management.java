@@ -29,6 +29,8 @@ public class Management implements IManagement {
             operations++;
         }
         data = clearEmptyFields(data);
+        merge = new MergeSort(new KeyComparator());
+        data = merge.sort(data);
 
         fileReader.close();
         scan.close();
@@ -45,6 +47,8 @@ public class Management implements IManagement {
             operations++;
         }
         data = clearEmptyFields(data);
+        merge = new MergeSort(new KeyComparator());
+        data = merge.sort(data);
     }
 
     public Management() {
