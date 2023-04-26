@@ -124,7 +124,7 @@ public class Management implements IManagement {
             }
             operations++;
         }
-        return null;
+        return matchingEmployees;
     }
 
     @Override
@@ -175,7 +175,7 @@ public class Management implements IManagement {
             }
             operations++;
         }
-        return null;
+        return matchingEmployees;
     }
 
     @Override
