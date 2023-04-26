@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Management implements IManagement {
     private IEmployee[] data = new IEmployee[8];
     private int operations;
-    private final MergeSort merge = new MergeSort(new KeyComparator());
+    private final MergeSort merge = new MergeSort(new DepartmentComparator());
 
     public Management(String fileName) throws IOException {
         operations = 0;
@@ -24,7 +24,7 @@ public class Management implements IManagement {
             data[i] = new Employee(nextLine);
             i++;
             if (i == data.length) {
-                data = Arrays.copyOf(data, data.length + 1);
+                data = Arrays.copyOf(data, data.length * 2);
             }
             operations++;
         }
@@ -41,7 +41,7 @@ public class Management implements IManagement {
             data[i] = new Employee(employee);
             i++;
             if (i == data.length) {
-                data = Arrays.copyOf(data, data.length + 1);
+                data = Arrays.copyOf(data, data.length * 2);
             }
             operations++;
         }
@@ -213,7 +213,7 @@ public class Management implements IManagement {
 //                "10354;1953-07-28;Dredge;Yinghua;M;1992-10-15;Sales",
 //                "10055;1953-07-28;Caine;Yinghua;M;1992-10-15;Sales"
 //        });
-        Management management = new Management("/Users/Oliver/Documents/Code/Ostfalia/svn/i-aud-ss2023/Gruppe022/AlgoDatSS23/Materialien/10k_employees.csv");
+        Management management = new Management("AlgoDatSS23/Materialien/10k_employees.csv");
 //        IEmployee[] ems = management.search("Yinghua", "Caine");
 //        System.out.println(ems.length);
         for (IEmployee e : management.data) {
