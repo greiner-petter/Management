@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Management implements IManagement {
     private IEmployee[] data = new IEmployee[8];
     private int operations;
-    private final MergeSort merge = new MergeSort(new KeyComparator());
+    private MergeSort merge;
 
     public Management(String fileName) throws IOException {
         operations = 0;
@@ -29,7 +29,6 @@ public class Management implements IManagement {
             operations++;
         }
         data = clearEmptyFields(data);
-        data = merge.sort(data);
 
         fileReader.close();
         scan.close();
@@ -46,7 +45,6 @@ public class Management implements IManagement {
             operations++;
         }
         data = clearEmptyFields(data);
-        data = merge.sort(data);
     }
 
     public Management() {
@@ -69,6 +67,8 @@ public class Management implements IManagement {
 
     @Override
     public IEmployee search(int key) {
+        merge = new MergeSort(new KeyComparator());
+        data = merge.sort(data);
         operations = 0;
         int l = 0;
         int r = data.length;
@@ -89,6 +89,8 @@ public class Management implements IManagement {
 
     @Override
     public IEmployee[] search(String name, String firstName) {
+        merge = new MergeSort(new NameComparator());
+        data = merge.sort(data);
         operations = 0;
         IEmployee[] matchingEmployees = new IEmployee[0];
         int i = 0;
@@ -142,6 +144,8 @@ public class Management implements IManagement {
 
     @Override
     public IEmployee[] members(Department department) {
+        merge = new MergeSort(new DepartmentComparator());
+        data = merge.sort(data);
         operations = 0;
         IEmployee[] matchingEmployees = new IEmployee[0];
         int i = 0;
