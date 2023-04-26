@@ -4,68 +4,44 @@ import java.util.Comparator;
 
 public class MergeSort {
     Comparator<IEmployee> comparator;
-    IEmployee[] data;
 
     public MergeSort(Comparator<IEmployee> comparator) {
         this.comparator = comparator;
     }
 
     public IEmployee[] sort(IEmployee[] data) {
-        this.data = data;
-        mergeSort(data);
+        return sort(data, 0, data.length-1);
+    }
+
+    public IEmployee[] sort(IEmployee[] data, int left, int right) {
+        if (left < right) {
+            int middle = (left + right) / 2;
+            sort(data, left, middle);
+            sort(data, middle + 1, right);
+            merge(data, left, middle, right);
+        }
         return data;
     }
 
-    private void mergeSort(IEmployee[] arr) {
-        if (arr.length > 1) {
-            int midpoint = arr.length / 2;
-            IEmployee[] l_arr = new IEmployee[midpoint];
-            IEmployee[] r_arr = new IEmployee[arr.length - midpoint];
-            int L_index = 0;
-            int R_index = 0;
-            while (L_index < l_arr.length) {
-                l_arr[L_index] = arr[L_index];
-                if (L_index + 1 < l_arr.length) {
-                    l_arr[L_index + 1] = arr[L_index + 1];
-                    L_index++;
-                }
-                L_index++;
-            }
-            L_index = midpoint;
-            while (R_index < r_arr.length) {
-                r_arr[R_index] = arr[L_index];
-                if (R_index + 1 < r_arr.length) {
-                    r_arr[R_index + 1] = arr[L_index + 1];
-                    L_index++;
-                    R_index++;
-                }
-                L_index++;
-                R_index++;
-            }
-            mergeSort(l_arr);
-            mergeSort(r_arr);
-            int l_index = 0;
-            int r_index = 0;
-            int index = 0;
-            while (l_index < l_arr.length && r_index < r_arr.length) {
-                if (comparator.compare(l_arr[l_index], r_arr[r_index]) < 0 ) {
-                    arr[index] = l_arr[l_index];
-                    l_index++;
-                } else {
-                    arr[index] = r_arr[r_index];
-                    r_index++;
-                }
-                index++;
-            }
-            while (l_index < l_arr.length) {
-                arr[index] = l_arr[l_index];
-                l_index++;
-                index++;
-            }
-            while (r_index < r_arr.length) {
-                arr[index] = r_arr[r_index];
-                r_index++;
-                index++;
+    public void merge(IEmployee[] data, int left, int middle, int right) {
+        IEmployee[] arr = new IEmployee[data.length];
+        int leftLeft;
+        int rightLeft;
+        for (leftLeft = left; leftLeft <= middle; leftLeft++) {
+            arr[leftLeft] = data[leftLeft];
+        }
+        for (rightLeft = middle + 1; rightLeft <= right; rightLeft++) {
+            arr[right + middle + 1 - rightLeft] = data[rightLeft];
+        }
+        leftLeft = left;
+        rightLeft = right;
+        for (int k = left; k <= right; k++) {
+            if (comparator.compare(arr[leftLeft], arr[rightLeft]) < 0) {
+                data[k] = arr[leftLeft];
+                leftLeft++;
+            } else {
+                data[k] = arr[rightLeft];
+                rightLeft--;
             }
         }
     }
