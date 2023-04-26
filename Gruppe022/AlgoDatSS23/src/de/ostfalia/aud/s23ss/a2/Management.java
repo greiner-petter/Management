@@ -33,7 +33,8 @@ public class Management implements IManagement {
         scan.close();
         employees = shorterArray();
         this.mergeSort = new MergeSort(new KeyComparator());
-        employees = mergeSort.sort(employees, 0, employees.length -1);
+        employees = mergeSort.sort(employees, operations);
+        operations += mergeSort.getOperations();
     }
 
     public Management(String[] data) {
@@ -45,7 +46,8 @@ public class Management implements IManagement {
         }
         employees = shorterArray();
         this.mergeSort = new MergeSort(new KeyComparator());
-        employees = mergeSort.sort(employees);
+        employees = mergeSort.sort(employees, operations);
+        operations += mergeSort.getOperations();
     }
 
     public Management() {
@@ -81,9 +83,10 @@ public class Management implements IManagement {
 
     @Override
     public IEmployee search(int key) {
-        mergeSort = new MergeSort(new KeyComparator());
-        employees = mergeSort.sort(employees, 0, employees.length -1);
         operations = 0;
+        mergeSort = new MergeSort(new KeyComparator());
+        employees = mergeSort.sort(employees, operations);
+        operations += mergeSort.getOperations();
         int l = 0;
         int r = employees.length -1;
 
@@ -104,9 +107,10 @@ public class Management implements IManagement {
 
     @Override
     public IEmployee[] search(String name, String firstName) {
-        mergeSort = new MergeSort(new NameComparator());
-        employees = mergeSort.sort(employees, 0, employees.length-1);
         operations = 0;
+        mergeSort = new MergeSort(new NameComparator());
+        employees = mergeSort.sort(employees, operations);
+        operations += mergeSort.getOperations();
         IEmployee[] matchingEmployees = new IEmployee[0];
         int i = 0;
         int l = 0;
@@ -145,9 +149,10 @@ public class Management implements IManagement {
 
     @Override
     public int size(Department department) {
-        mergeSort = new MergeSort(new DepartmentComparator());
-        mergeSort.sort(employees, 0, employees.length-1);
         operations = 0;
+        mergeSort = new MergeSort(new DepartmentComparator());
+        employees = mergeSort.sort(employees, operations);
+        operations += mergeSort.getOperations();
         int i = 0;
         int l = 0;
         int r = employees.length;
@@ -180,9 +185,10 @@ public class Management implements IManagement {
 
     @Override
     public IEmployee[] members(Department department) {
-        mergeSort = new MergeSort(new DepartmentComparator());
-        employees = mergeSort.sort(employees, 0, employees.length -1);
         operations = 0;
+        mergeSort = new MergeSort(new DepartmentComparator());
+        employees = mergeSort.sort(employees, operations);
+        operations += mergeSort.getOperations();
         IEmployee[] matchingEmployees = new IEmployee[0];
 
         if (employees[0].getDepartment() == department) {
@@ -231,7 +237,8 @@ public class Management implements IManagement {
     public IEmployee[] toArray() {
         employees = shorterArray();
         this.mergeSort = new MergeSort(new KeyComparator());
-        employees = mergeSort.sort(employees, 0, employees.length -1);
+        employees = mergeSort.sort(employees, operations);
+        operations += mergeSort.getOperations();
         return employees;
     }
 

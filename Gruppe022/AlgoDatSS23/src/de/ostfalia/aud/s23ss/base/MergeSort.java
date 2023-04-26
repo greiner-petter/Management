@@ -1,15 +1,19 @@
 package de.ostfalia.aud.s23ss.base;
 
+import de.ostfalia.aud.s23ss.a2.Management;
+
 import java.util.Comparator;
 
 public class MergeSort {
     Comparator<IEmployee> comparator;
+    int operations;
 
     public MergeSort(Comparator<IEmployee> comparator) {
         this.comparator = comparator;
     }
 
-    public IEmployee[] sort(IEmployee[] data) {
+    public IEmployee[] sort(IEmployee[] data, int operations) {
+        this.operations = operations;
         return sort(data, 0, data.length-1);
     }
 
@@ -44,5 +48,9 @@ public class MergeSort {
                 rightLeft--;
             }
         }
+    }
+
+    public int getOperations() {
+        return operations;
     }
 }
