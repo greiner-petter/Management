@@ -36,6 +36,7 @@ public class Management implements IManagement {
 
     public Management() {
         data = new String[0];
+        tree = new Tree(null, new KeyComparator());
     }
 
     private int newTree(Comparator<IEmployee> comparator) {
@@ -56,7 +57,7 @@ public class Management implements IManagement {
     @Override
     public void insert(IEmployee member) {
         addData(member);
-        if (tree == null) {
+        if (tree.getNode() == null) {
             tree = new Tree(member, new KeyComparator());
         } else {
             tree.add(member);
