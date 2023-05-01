@@ -1,7 +1,6 @@
 package de.ostfalia.aud.s23ss.base;
 
-import de.ostfalia.aud.s23ss.comparator.KeyComparator;
-
+import java.util.Arrays;
 import java.util.Comparator;
 
 /**
@@ -24,7 +23,11 @@ public class Tree {
      */
     private Tree rhs;
 
+    private Tree mid;
+
     private Comparator<IEmployee> comparator;
+
+    private TreeIterator iterator;
 
     /**
      * Creates a new tree with the value node.
@@ -34,6 +37,7 @@ public class Tree {
         this.node = node;
         this.lhs = null;
         this.rhs = null;
+        this.mid = null;
         this.comparator = comparator;
     }
 
@@ -52,6 +56,11 @@ public class Tree {
             rhs = new Tree(insert, comparator);
         } else if ((comparator.compare(insert, node) > 0) && (rhs != null)) {
             rhs.add(insert);
+        }
+        if ((comparator.compare(insert, node) == 0) && (mid == null)) {
+            mid = new Tree(insert, comparator);
+        } else if ((comparator.compare(insert, node) == 0) && (mid != null)) {
+            mid.add(insert);
         }
     }
 
@@ -82,22 +91,16 @@ public class Tree {
         return depth;
     }
 
-    /**
-     * Method to find a number in the tree.
-     *
-     * @param wanted the wanted number
-     * @return true, if the wanted number exists in the try, else false
-     */
-    public boolean exists(IEmployee wanted) {
-        boolean exists = false;
-        if (wanted.equals(node)) {
-            return true;
-        } else if ((comparator.compare(wanted, node) < 0) && (lhs != null)) {
-            exists = lhs.exists(wanted);
-        } else if ((comparator.compare(wanted, node) > 0) && (rhs != null)) {
-            exists = rhs.exists(wanted);
+    public int size() {
+        return size(this);
+    }
+    private int size(Tree node) {
+        if (node == null) {
+            return 0;
         }
-        return exists;
+        else {
+            return (size(node.lhs) + 1 + size(node.mid) + size(node.rhs));
+        }
     }
 
     public IEmployee search(int key){
@@ -113,59 +116,73 @@ public class Tree {
     }
 
     public Tree search(String name, String firstName) {
-        IEmployee[] wanted = null;
+        Tree wantedTree = null;
         if (name.equals(node.getName()) && firstName.equals(node.getFirstName())) {
-            return null;
+            trim();
+            return this;
+        } else if ((name.compareTo(node.getName()) < 0) && (lhs != null)) {
+            wantedTree = lhs.search(name, firstName);
+        } else if ((name.compareTo(node.getName()) > 0) && (rhs != null)) {
+            wantedTree = rhs.search(name, firstName);
         }
-        return null;
+        if (wantedTree != null) {
+            wantedTree.trim();
+        }
+        return wantedTree;
     }
 
-    /**
-     * Method to find the smallest number in the tree.
-     *
-     * @return the smallest number in the tree
-     */
-    public IEmployee smallest() {
-        IEmployee smallest = null;
-        if (lhs == null) {
-            return node;
-        } else {
-            smallest = lhs.smallest();
+    public Tree search(Department department) {
+        Tree wantedTree = null;
+        if (department.equals(node.getDepartment())) {
+            trim();
+            return this;
+        } else if ((department.compareTo(node.getDepartment()) < 0) && (lhs != null)) {
+            wantedTree = lhs.search(department);
+        } else if ((department.compareTo(node.getDepartment()) > 0) && (rhs != null)) {
+            wantedTree = rhs.search(department);
         }
-        return smallest;
+        if (wantedTree != null) {
+            wantedTree.trim();
+        }
+        return wantedTree;
     }
 
-    /**
-     * Method to find the biggest number in the tree.
-     *
-     * @return the biggest number in the tree
-     */
-    public IEmployee biggest() {
-        IEmployee biggest = null;
-        if (rhs == null) {
-            return node;
-        } else {
-            biggest = rhs.biggest();
-        }
-        return biggest;
+    private void trim() {
+        lhs = null;
+        rhs = null;
     }
 
-    /**
-     * Method to check whether a tree is degenerate.
-     *
-     * @return true if every node has either no or one child node, else false
-     */
-    public boolean isDegenerate() {
-        boolean degenerate = true;
-        if ((lhs != null) && (rhs != null)) {
-            degenerate = false;
-        } else if ((lhs != null) && (rhs == null)) {
-            degenerate = lhs.isDegenerate();
-        } else if ((rhs != null) && (lhs == null)) {
-            degenerate = rhs.isDegenerate();
-        }
-        return degenerate;
+    public Tree getLeft() {
+        return lhs;
     }
+
+    public Tree getMid() {
+        return mid;
+    }
+
+    public Tree getRight() {
+        return rhs;
+    }
+
+    public IEmployee getNode() {
+        return node;
+    }
+
+    public IEmployee[] toArray(Tree tree) {
+        int i = 0;
+        iterator = new TreeIterator(tree);
+
+        IEmployee[] result = new IEmployee[0];
+        while (iterator.hasNext()) {
+            if (i == result.length) {
+                result = Arrays.copyOf(result, result.length + 1);
+            }
+            result[i] = iterator.next();
+            i++;
+        }
+        return result;
+    }
+
 
     /**
      * Method that formats the tree into a readable string.

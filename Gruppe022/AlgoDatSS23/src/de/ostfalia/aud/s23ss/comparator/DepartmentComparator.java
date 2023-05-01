@@ -8,6 +8,6 @@ public class DepartmentComparator implements Comparator<IEmployee> {
 
     @Override
     public int compare(IEmployee o1, IEmployee o2) {
-        return o1.getDepartment().toString().compareTo(o2.getDepartment().toString());
+        return o1.getDepartment().compareTo(o2.getDepartment());
     }
 }
