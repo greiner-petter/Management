@@ -33,6 +33,10 @@ public class Management implements IManagement {
         operations = newTree(new KeyComparator());
     }
 
+    public Management() {
+        data = null;
+    }
+
     private int newTree(Comparator<IEmployee> comparator) {
         operations = 0;
         tree = new Tree(new Employee(data[0]), comparator);
