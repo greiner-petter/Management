@@ -29,6 +29,8 @@ public class Tree {
 
     private TreeIterator iterator;
 
+    private int operations;
+
     /**
      * Creates a new tree with the value node.
      * @param node The value of this node in the tree.
@@ -104,25 +106,33 @@ public class Tree {
     }
 
     public IEmployee search(int key){
+        operations++;
         IEmployee wanted = null;
         if (key == node.getKey()) {
+            operations++;
             return node;
         } else if ((key < node.getKey()) && (lhs != null)) {
+            operations++;
             wanted = lhs.search(key);
         } else if ((key > node.getKey()) && (rhs != null)) {
+            operations++;
             wanted = rhs.search(key);
         }
         return wanted;
     }
 
     public Tree search(String name, String firstName) {
+        operations = 0;
         Tree wantedTree = null;
         if (name.equals(node.getName()) && firstName.equals(node.getFirstName())) {
+            operations++;
             trim();
             return this;
         } else if ((name.compareTo(node.getName()) < 0) && (lhs != null)) {
+            operations++;
             wantedTree = lhs.search(name, firstName);
         } else if ((name.compareTo(node.getName()) > 0) && (rhs != null)) {
+            operations++;
             wantedTree = rhs.search(name, firstName);
         }
         if (wantedTree != null) {
@@ -132,13 +142,17 @@ public class Tree {
     }
 
     public Tree search(Department department) {
+        operations = 0;
         Tree wantedTree = null;
         if (department.equals(node.getDepartment())) {
+            operations++;
             trim();
             return this;
         } else if ((department.compareTo(node.getDepartment()) < 0) && (lhs != null)) {
+            operations++;
             wantedTree = lhs.search(department);
         } else if ((department.compareTo(node.getDepartment()) > 0) && (rhs != null)) {
+            operations++;
             wantedTree = rhs.search(department);
         }
         if (wantedTree != null) {
@@ -181,6 +195,10 @@ public class Tree {
             i++;
         }
         return result;
+    }
+
+    public int getOperations() {
+        return operations;
     }
 
 

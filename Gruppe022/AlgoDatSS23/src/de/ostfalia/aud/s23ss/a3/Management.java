@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 public class Management implements IManagement {
     private Tree tree;
-    private int operations;
     private String[] data;
 
     public Management(String fileName) throws IOException {
@@ -24,14 +23,14 @@ public class Management implements IManagement {
             data[i] = scan.nextLine();
             i++;
         }
-        operations = newTree(new KeyComparator());
+        newTree(new KeyComparator());
         fileReader.close();
         scan.close();
     }
 
     public Management(String[] data) {
         this.data = data;
-        operations = newTree(new KeyComparator());
+        newTree(new KeyComparator());
     }
 
     public Management() {
@@ -39,14 +38,11 @@ public class Management implements IManagement {
         tree = new Tree(null, new KeyComparator());
     }
 
-    private int newTree(Comparator<IEmployee> comparator) {
-        operations = 0;
+    private void newTree(Comparator<IEmployee> comparator) {
         tree = new Tree(new Employee(data[0]), comparator);
         for (int i = 1; i < data.length; i++) {
             tree.add(new Employee(data[i]));
-            operations++;
         }
-        return operations;
     }
 
     @Override
@@ -66,25 +62,25 @@ public class Management implements IManagement {
 
     @Override
     public IEmployee search(int key) {
-        operations = newTree(new KeyComparator());
+        newTree(new KeyComparator());
         return tree.search(key);
     }
 
     @Override
     public IEmployee[] search(String name, String firstName) {
-        operations = newTree(new NameComparator());
+        newTree(new NameComparator());
         return tree.search(name, firstName).toArray(tree);
     }
 
     @Override
     public int size(Department department) {
-        operations = newTree(new DepartmentComparator());
+        newTree(new DepartmentComparator());
         return tree.search(department).size();
     }
 
     @Override
     public IEmployee[] members(Department department) {
-        operations = newTree(new DepartmentComparator());
+        newTree(new DepartmentComparator());
         return tree.search(department).toArray(tree);
     }
 
@@ -95,7 +91,7 @@ public class Management implements IManagement {
 
     @Override
     public int numberOfOperations() {
-        return operations;
+        return tree.getOperations();
     }
 
     @Override
