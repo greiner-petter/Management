@@ -5,13 +5,14 @@ import de.ostfalia.aud.s23ss.comparator.*;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
 
 public class Management implements IManagement {
     private Tree tree;
     private int operations;
-    private final String[] data;
+    private String[] data;
 
     public Management(String fileName) throws IOException {
         FileReader fileReader = new FileReader(fileName);
@@ -34,7 +35,7 @@ public class Management implements IManagement {
     }
 
     public Management() {
-        data = null;
+        data = new String[0];
     }
 
     private int newTree(Comparator<IEmployee> comparator) {
@@ -49,12 +50,17 @@ public class Management implements IManagement {
 
     @Override
     public int size() {
-        return 0;
+        return tree.size();
     }
 
     @Override
     public void insert(IEmployee member) {
-        tree.add(member);
+        addData(member);
+        if (tree == null) {
+            tree = new Tree(member, new KeyComparator());
+        } else {
+            tree.add(member);
+        }
     }
 
     @Override
@@ -66,23 +72,24 @@ public class Management implements IManagement {
     @Override
     public IEmployee[] search(String name, String firstName) {
         operations = newTree(new NameComparator());
-        Tree wanted = tree.search(name, firstName);
-        return null;
+        return tree.search(name, firstName).toArray(tree);
     }
 
     @Override
     public int size(Department department) {
-        return 0;
+        operations = newTree(new DepartmentComparator());
+        return tree.search(department).size();
     }
 
     @Override
     public IEmployee[] members(Department department) {
-        return new IEmployee[0];
+        operations = newTree(new DepartmentComparator());
+        return tree.search(department).toArray(tree);
     }
 
     @Override
     public IEmployee[] toArray() {
-        return new IEmployee[0];
+        return tree.toArray(tree);
     }
 
     @Override
@@ -93,6 +100,11 @@ public class Management implements IManagement {
     @Override
     public int height() {
         return tree.depth();
+    }
+
+    public void addData(IEmployee member) {
+        data = Arrays.copyOf(data, data.length + 1);
+        data[data.length - 1] = member.toString();
     }
 
     public static void main(String[] args) throws IOException {
@@ -110,11 +122,9 @@ public class Management implements IManagement {
                 "15524;1960-09-18;Qiwen;Veldwijk;M;1989-06-12;Manpower",
                 "16278;1954-06-11;Marin;Pokrovskii;M;1989-02-20;Production",
                 "15149;1964-02-11;Erzsebet;Chandrasekhar;F;1992-12-29;Development",
-                "13146;1953-11-01;Haldon;Erie;M;1985-05-25;Sales"
+                "13146;1953-11-01;Haldon;Erie;M;1985-05-25;Sales",
+                "19064;1957-10-31;Hironobu;Gecsei;F;1995-02-23;Service"
         });
         Management management10k = new Management("AlgoDatSS23/Materialien/10k_employees.csv");
-//        System.out.println(management10k.search(13782));
-        System.out.println(management10k.tree.smallest());
-        System.out.println(management10k.tree.biggest());
     }
 }
