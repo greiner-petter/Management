@@ -107,7 +107,11 @@ public class Management implements IManagement {
             comparator = new DepartmentComparator();
             newTree(comparator);
         }
-        return tree.search(department).size();
+        Tree searched = tree.search(department);
+        if (searched == null) {
+            return 0;
+        }
+        return searched.size();
     }
 
     @Override
@@ -120,8 +124,8 @@ public class Management implements IManagement {
         if (result == null) {
             return new IEmployee[0];
         }
-        comparator = new KeyComparator();
-        result = sortTree(result.toArray(result), comparator);
+//        comparator = new KeyComparator();
+//        result = sortTree(result.toArray(result), comparator);
         return result.toArray(result);
     }
 
