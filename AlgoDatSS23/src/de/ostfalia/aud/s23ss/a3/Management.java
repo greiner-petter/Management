@@ -70,6 +70,9 @@ public class Management implements IManagement {
     public IEmployee[] search(String name, String firstName) {
         newTree(new NameComparator());
         Tree result = tree.search(name, firstName);
+        if (result == null) {
+            return null;
+        }
         IEmployee[] returnArray = new IEmployee[result.size()];
         int i = 0;
         for (IEmployee e : result.toArray(result)) {
@@ -135,5 +138,8 @@ public class Management implements IManagement {
                 "19064;1957-10-31;Hironobu;Gecsei;F;1995-02-23;Service"
         });
         Management management10k = new Management("AlgoDatSS23/Materialien/10k_employees.csv");
+        Management managementNoArgs = new Management();
+        management.search(management.toArray()[9].getName(), "jeff");
+        System.out.println(Arrays.toString(managementNoArgs.toArray()));
     }
 }
