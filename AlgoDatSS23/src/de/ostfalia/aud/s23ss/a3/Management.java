@@ -46,6 +46,14 @@ public class Management implements IManagement {
         }
     }
 
+    private Tree sortTree(IEmployee[] data, Comparator<IEmployee> comparator) {
+        Tree tree = new Tree(data[0], comparator);
+        for (int i = 1; i < data.length; i++) {
+            tree.add(data[i]);
+        }
+        return tree;
+    }
+
     @Override
     public int size() {
         return tree.size();
@@ -109,6 +117,11 @@ public class Management implements IManagement {
             newTree(comparator);
         }
         Tree result = tree.search(department);
+        if (result == null) {
+            return new IEmployee[0];
+        }
+        comparator = new KeyComparator();
+        result = sortTree(result.toArray(result), comparator);
         return result.toArray(result);
     }
 
@@ -130,6 +143,9 @@ public class Management implements IManagement {
 
     @Override
     public int height() {
+        if (tree == null) {
+            return 0;
+        }
         return tree.depth(tree);
     }
 
@@ -161,9 +177,8 @@ public class Management implements IManagement {
         management.insert(management10k.toArray()[1]);
         System.out.println(Arrays.toString(managementNoArgs.toArray()));
 
-        management10k = new Management();
         Employee employee = new Employee("10855;1957-08-07;Breannda;Billingsley;F;1991-08-05;Finance");
         management10k.insert(employee);
-        System.out.println(management10k.search(10855));
+        System.out.println(Arrays.toString(management10k.members(Department.SERVICE)));
     }
 }
