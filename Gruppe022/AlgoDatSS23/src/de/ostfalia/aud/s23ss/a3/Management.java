@@ -35,7 +35,7 @@ public class Management implements IManagement {
 
     public Management() {
         data = new String[0];
-        tree = new Tree(null, new KeyComparator());
+        tree = new Tree();
     }
 
     private void newTree(Comparator<IEmployee> comparator) {
@@ -71,7 +71,7 @@ public class Management implements IManagement {
         newTree(new NameComparator());
         Tree result = tree.search(name, firstName);
         if (result == null) {
-            return null;
+            return new IEmployee[0];
         }
         IEmployee[] returnArray = new IEmployee[result.size()];
         int i = 0;
@@ -139,7 +139,7 @@ public class Management implements IManagement {
         });
         Management management10k = new Management("AlgoDatSS23/Materialien/10k_employees.csv");
         Management managementNoArgs = new Management();
-        management.search(management.toArray()[9].getName(), "jeff");
-        System.out.println(Arrays.toString(managementNoArgs.toArray()));
+        management.insert(management10k.toArray()[1]);
+        System.out.println(Arrays.toString(management.search("Jeff", "jeff")));
     }
 }
