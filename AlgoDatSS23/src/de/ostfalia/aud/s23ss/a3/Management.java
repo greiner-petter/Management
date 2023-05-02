@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class Management implements IManagement {
     private Tree tree;
     private String[] data;
+    private Comparator<IEmployee> comparator = new KeyComparator();
 
     public Management(String fileName) throws IOException {
         FileReader fileReader = new FileReader(fileName);
@@ -23,14 +24,14 @@ public class Management implements IManagement {
             data[i] = scan.nextLine();
             i++;
         }
-        newTree(new KeyComparator());
+        newTree(comparator);
         fileReader.close();
         scan.close();
     }
 
     public Management(String[] data) {
         this.data = data;
-        newTree(new KeyComparator());
+        newTree(comparator);
     }
 
     public Management() {
@@ -62,13 +63,19 @@ public class Management implements IManagement {
 
     @Override
     public IEmployee search(int key) {
-        newTree(new KeyComparator());
+        if (!(comparator instanceof KeyComparator)) {
+            comparator = new KeyComparator();
+            newTree(comparator);
+        }
         return tree.search(key);
     }
 
     @Override
     public IEmployee[] search(String name, String firstName) {
-        newTree(new NameComparator());
+        if (!(comparator instanceof NameComparator)) {
+            comparator = new NameComparator();
+            newTree(comparator);
+        }
         Tree result = tree.search(name, firstName);
         if (result == null) {
             return new IEmployee[0];
@@ -88,13 +95,19 @@ public class Management implements IManagement {
 
     @Override
     public int size(Department department) {
-        newTree(new DepartmentComparator());
+        if (!(comparator instanceof DepartmentComparator)) {
+            comparator = new DepartmentComparator();
+            newTree(comparator);
+        }
         return tree.search(department).size();
     }
 
     @Override
     public IEmployee[] members(Department department) {
-        newTree(new DepartmentComparator());
+        if (!(comparator instanceof DepartmentComparator)) {
+            comparator = new DepartmentComparator();
+            newTree(comparator);
+        }
         Tree result = tree.search(department);
         return result.toArray(result);
     }
