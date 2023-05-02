@@ -50,6 +50,6 @@ public enum Department {
     }
 
     public static Department create(String department) {
-        return Department.valueOf(department);
+        return Department.valueOf(department.toUpperCase());
     }
 }
