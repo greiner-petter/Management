@@ -69,7 +69,18 @@ public class Management implements IManagement {
     @Override
     public IEmployee[] search(String name, String firstName) {
         newTree(new NameComparator());
-        return tree.search(name, firstName).toArray(tree);
+        Tree result = tree.search(name, firstName);
+        IEmployee[] returnArray = new IEmployee[result.size()];
+        int i = 0;
+        for (IEmployee e : result.toArray(result)) {
+            if (e.getFirstName().equals(firstName)) {
+                returnArray[i] = e;
+                i++;
+            } else {
+                returnArray = Arrays.copyOf(returnArray, returnArray.length - 1);
+            }
+        }
+        return returnArray;
     }
 
     @Override
@@ -81,7 +92,8 @@ public class Management implements IManagement {
     @Override
     public IEmployee[] members(Department department) {
         newTree(new DepartmentComparator());
-        return tree.search(department).toArray(tree);
+        Tree result = tree.search(department);
+        return result.toArray(result);
     }
 
     @Override
