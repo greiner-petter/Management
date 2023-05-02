@@ -124,8 +124,8 @@ public class Management implements IManagement {
         if (result == null) {
             return new IEmployee[0];
         }
-//        comparator = new KeyComparator();
-//        result = sortTree(result.toArray(result), comparator);
+        comparator = new KeyComparator();
+        result = sortTree(result.toArray(result), comparator);
         return result.toArray(result);
     }
 
