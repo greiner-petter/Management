@@ -101,7 +101,13 @@ public class Management implements IManagement {
 
     @Override
     public IEmployee[] toArray() {
-        return tree.toArray(tree);
+        IEmployee[] result = tree.toArray(tree);
+        for (IEmployee e : result) {
+            if (e == null) {
+                result = Arrays.copyOf(result, result.length - 1);
+            }
+        }
+        return result;
     }
 
     @Override
@@ -140,6 +146,6 @@ public class Management implements IManagement {
         Management management10k = new Management("AlgoDatSS23/Materialien/10k_employees.csv");
         Management managementNoArgs = new Management();
         management.insert(management10k.toArray()[1]);
-        System.out.println(Arrays.toString(management.search("Jeff", "jeff")));
+        System.out.println(Arrays.toString(managementNoArgs.toArray()));
     }
 }
