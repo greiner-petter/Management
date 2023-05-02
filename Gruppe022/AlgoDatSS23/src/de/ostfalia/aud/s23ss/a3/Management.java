@@ -117,7 +117,7 @@ public class Management implements IManagement {
 
     @Override
     public int height() {
-        return tree.depth();
+        return tree.depth(tree);
     }
 
     public void addData(IEmployee member) {
