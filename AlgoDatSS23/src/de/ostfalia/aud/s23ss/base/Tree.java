@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 /**
  * A binary tree with int values.
+ * @author Gruppe 022
  */
 public class Tree {
 
@@ -34,6 +35,7 @@ public class Tree {
     /**
      * Creates a new tree with the value node.
      * @param node The value of this node in the tree.
+     * @param comparator entscheidet wie die Werte verglichen werden
      */
     public Tree(IEmployee node, Comparator<IEmployee> comparator) {
         this.node = node;

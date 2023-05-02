@@ -1,6 +1,5 @@
 package de.ostfalia.aud.s23ss.base;
 
-import de.ostfalia.aud.s23ss.a2.Management;
 
 import java.util.Comparator;
 
