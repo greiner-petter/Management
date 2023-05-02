@@ -83,24 +83,6 @@ public class Tree {
      * @return the depth of the tree
      */
     public int depth(Tree tree) {
-//        int depth = 0;
-//        int left = 0;
-//        int right = 0;
-//        if (lhs == null && rhs == null) {
-//            return 0;
-//        }
-//        if (lhs != null) {
-//            left = lhs.depth();
-//        }
-//        if (rhs != null) {
-//            right = rhs.depth();
-//        }
-//        if (left > right) {
-//            depth = left + 1;
-//        } else {
-//            depth = right + 1;
-//        }
-//        return depth;
         if (tree == null) {
             return 0;
         } else {
@@ -144,7 +126,7 @@ public class Tree {
     public Tree search(String name, String firstName) {
         operations = 0;
         Tree wantedTree = null;
-        if (name.equals(node.getName()) && firstName.equals(node.getFirstName())) {
+        if (name.equals(node.getName())) {
             operations++;
             trim();
             return this;
