@@ -43,6 +43,14 @@ public class Tree {
         this.comparator = comparator;
     }
 
+    public Tree() {
+        this.node = null;
+        this.lhs = null;
+        this.rhs = null;
+        this.mid = null;
+        this.comparator = null;
+    }
+
     /**
      * Method to add a node to the tree. Duplicates will be refused.
      *
