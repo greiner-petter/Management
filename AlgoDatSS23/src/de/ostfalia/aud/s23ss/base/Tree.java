@@ -82,25 +82,36 @@ public class Tree {
      *
      * @return the depth of the tree
      */
-    public int depth() {
-        int depth = 0;
-        int left = 0;
-        int right = 0;
-        if (lhs == null && rhs == null) {
+    public int depth(Tree tree) {
+//        int depth = 0;
+//        int left = 0;
+//        int right = 0;
+//        if (lhs == null && rhs == null) {
+//            return 0;
+//        }
+//        if (lhs != null) {
+//            left = lhs.depth();
+//        }
+//        if (rhs != null) {
+//            right = rhs.depth();
+//        }
+//        if (left > right) {
+//            depth = left + 1;
+//        } else {
+//            depth = right + 1;
+//        }
+//        return depth;
+        if (tree == null) {
             return 0;
-        }
-        if (lhs != null) {
-            left = lhs.depth();
-        }
-        if (rhs != null) {
-            right = rhs.depth();
-        }
-        if (left > right) {
-            depth = left + 1;
         } else {
-            depth = right + 1;
+            int leftHeight = depth(tree.getLeft());
+            int rightHeight = depth(tree.getRight());
+            if (leftHeight > rightHeight) {
+                return leftHeight + 1;
+            } else {
+                return rightHeight + 1;
+            }
         }
-        return depth;
     }
 
     public int size() {
