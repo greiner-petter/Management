@@ -147,5 +147,10 @@ public class Management implements IManagement {
         Management managementNoArgs = new Management();
         management.insert(management10k.toArray()[1]);
         System.out.println(Arrays.toString(managementNoArgs.toArray()));
+
+        management10k = new Management();
+        Employee employee = new Employee("10855;1957-08-07;Breannda;Billingsley;F;1991-08-05;Finance");
+        management10k.insert(employee);
+        System.out.println(management10k.search(10855));
     }
 }
