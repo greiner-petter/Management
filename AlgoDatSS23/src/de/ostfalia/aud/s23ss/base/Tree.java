@@ -99,8 +99,7 @@ public class Tree {
     private int size(Tree node) {
         if (node == null) {
             return 0;
-        }
-        else {
+        } else {
             return (size(node.lhs) + 1 + size(node.mid) + size(node.rhs));
         }
     }
