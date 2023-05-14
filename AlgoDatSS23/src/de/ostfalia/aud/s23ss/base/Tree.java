@@ -63,13 +63,11 @@ public class Tree {
             lhs = new Tree(insert, comparator);
         } else if ((comparator.compare(insert, node) < 0) && (lhs != null)) {
             lhs.add(insert);
-        }
-        if ((comparator.compare(insert, node) > 0) && (rhs == null)) {
+        } else if ((comparator.compare(insert, node) > 0) && (rhs == null)) {
             rhs = new Tree(insert, comparator);
         } else if ((comparator.compare(insert, node) > 0) && (rhs != null)) {
             rhs.add(insert);
-        }
-        if ((comparator.compare(insert, node) == 0) && (mid == null)) {
+        } else if ((comparator.compare(insert, node) == 0) && (mid == null)) {
             mid = new Tree(insert, comparator);
         } else if ((comparator.compare(insert, node) == 0) && (mid != null)) {
             mid.add(insert);
