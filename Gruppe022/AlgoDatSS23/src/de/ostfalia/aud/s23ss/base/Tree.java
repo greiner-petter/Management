@@ -77,7 +77,7 @@ public class Tree {
     /**
      * Method to calculate the depth of a tree. It is defined by the maximal
      * number of edges to a leaf.
-     *
+     * @param tree .
      * @return the depth of the tree
      */
     public int depth(Tree tree) {

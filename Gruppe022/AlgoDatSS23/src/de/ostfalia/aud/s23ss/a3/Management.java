@@ -1,7 +1,14 @@
 package de.ostfalia.aud.s23ss.a3;
 
-import de.ostfalia.aud.s23ss.base.*;
-import de.ostfalia.aud.s23ss.comparator.*;
+import de.ostfalia.aud.s23ss.base.Employee;
+import de.ostfalia.aud.s23ss.base.IEmployee;
+import de.ostfalia.aud.s23ss.base.IManagement;
+import de.ostfalia.aud.s23ss.base.Tree;
+import de.ostfalia.aud.s23ss.base.Department;
+import de.ostfalia.aud.s23ss.base.MergeSort;
+import de.ostfalia.aud.s23ss.comparator.DepartmentComparator;
+import de.ostfalia.aud.s23ss.comparator.KeyComparator;
+import de.ostfalia.aud.s23ss.comparator.NameComparator;
 
 import java.io.FileReader;
 import java.io.IOException;
