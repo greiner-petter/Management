@@ -30,6 +30,8 @@ public class ManagementMap implements IManagement {
         }
     }
 
+    public ManagementMap() {}
+
     @Override
     public int size() {
         return data.size();

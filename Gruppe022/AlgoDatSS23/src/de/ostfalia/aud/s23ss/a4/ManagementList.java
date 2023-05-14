@@ -28,6 +28,8 @@ public class ManagementList implements IManagement {
         }
     }
 
+    public ManagementList() {}
+
     @Override
     public int size() {
         return data.size();
