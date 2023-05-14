@@ -1,6 +1,5 @@
 package de.ostfalia.aud.s23ss.base;
 
-import java.util.Iterator;
 import java.util.Stack;
 
 public class TreeIterator {

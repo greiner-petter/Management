@@ -1,6 +1,9 @@
 package de.ostfalia.aud.s23ss.a4;
 
-import de.ostfalia.aud.s23ss.base.*;
+import de.ostfalia.aud.s23ss.base.Department;
+import de.ostfalia.aud.s23ss.base.Employee;
+import de.ostfalia.aud.s23ss.base.IEmployee;
+import de.ostfalia.aud.s23ss.base.IManagement;
 
 import java.io.FileReader;
 import java.io.IOException;
