@@ -1,9 +1,10 @@
 package de.ostfalia.aud.s23ss.base;
 
+import java.util.Iterator;
 import java.util.Stack;
 
 public class TreeIterator {
-    Stack<Tree> stack;
+    private Stack<Tree> stack;
 
     public TreeIterator(Tree root) {
         stack = new Stack<>();
