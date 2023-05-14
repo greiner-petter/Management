@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class ManagementMap implements IManagement {
-    HashMap<Integer, IEmployee> data = new HashMap<>();
+    private final HashMap<Integer, IEmployee> data = new HashMap<>();
 
     public ManagementMap(String fileName) throws IOException {
         FileReader fileReader = new FileReader(fileName);

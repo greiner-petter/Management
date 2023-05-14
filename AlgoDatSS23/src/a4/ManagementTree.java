@@ -13,7 +13,7 @@ import java.util.Scanner;
 import java.util.TreeSet;
 
 public class ManagementTree implements IManagement {
-    TreeSet<IEmployee> data = new TreeSet<>(new KeyComparator());
+    private final TreeSet<IEmployee> data = new TreeSet<>(new KeyComparator());
 
     public ManagementTree(String fileName) throws IOException {
         FileReader fileReader = new FileReader(fileName);
