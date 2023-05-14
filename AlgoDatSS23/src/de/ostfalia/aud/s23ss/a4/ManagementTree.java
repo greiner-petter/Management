@@ -29,6 +29,7 @@ public class ManagementTree implements IManagement {
             data.add(new Employee(employee));
         }
     }
+    public ManagementTree() {}
 
     @Override
     public int size() {
