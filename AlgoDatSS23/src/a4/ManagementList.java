@@ -18,8 +18,7 @@ public class ManagementList implements IManagement {
         Scanner scan = new Scanner(fileReader);
         scan.nextLine();
         while (scan.hasNextLine()) {
-            String nextLine = scan.nextLine();
-            data.add(new Employee(nextLine));
+            insert(new Employee(scan.nextLine()));
         }
         fileReader.close();
         scan.close();
@@ -27,7 +26,7 @@ public class ManagementList implements IManagement {
 
     public ManagementList(String[] input) {
         for (String employee : input) {
-            data.add(new Employee(employee));
+            insert(new Employee(employee));
         }
     }
 
